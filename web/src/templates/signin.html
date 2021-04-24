@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Signin</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <p>{{message}}</p>
+        <form action="signin" method="POST">
+            <input name="username" placeholder="Username" value={{username}}>
+            <input name="password" placeholder="Password" type="password">
+            <button onclick="submit">登录</button>
+            <a href="signup">注册</a>
+        </form>
+    </body>
+</html>
