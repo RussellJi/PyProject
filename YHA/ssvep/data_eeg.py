@@ -76,10 +76,12 @@ class MyThread(QThread):  # 线程类
             r = feature_data[result]
 
 
-            if result == 7 :
+            if result == 5 :
                 r = r + 0.1
+            elif result == 6:
+                r = r + 0.05
 
-            if r > 0.3 :
+            if r > 0.4 :
                 print("分类结果：", result + 1)
                 b = str(result + 1)
                 self.command_signal.emit(b)

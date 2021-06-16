@@ -274,7 +274,7 @@ class Demo(QMainWindow):
         # 获取板子参数
         board_set = [self.board.boardComboxBox.currentIndex() - 2, self.board.edit_b4.text(),
                      int(self.board.edit_b1.text()),
-                     int(self.board.edit_b2.text()), int(self.board.edit_b3.text())]
+                     int(self.board.edit_b2.text()), float(self.board.edit_b3.text())]
         # 获取预处理参数
         pre_set1 = []
         pre_set2 = []
@@ -304,7 +304,7 @@ class Demo(QMainWindow):
         elif self.deal.deal1_combobox.currentIndex() == 4:
             pre_set1.append(3)
             pre_set1.append(int(self.board.edit_b2.text()))
-            pre_set1.append(int(self.board.edit_b3.text()))
+            pre_set1.append(float(self.board.edit_b3.text()))
 
         # 设置预处理2列表
         if self.deal.deal2_combobox.currentIndex() == 1:
@@ -351,7 +351,7 @@ class Demo(QMainWindow):
                 chass.append(float(self.characteristic.lei[i].text()))
             chass_list.append(chass)
             chass_list.append(int(self.board.edit_b2.text()))
-            chass_list.append(int(self.board.edit_b3.text()))
+            chass_list.append(float(self.board.edit_b3.text()))
             chass_list.append(self.characteristic.cca_index)
         elif self.characteristic.chass_combobox.currentIndex() == 5:
             chass_list.append(4)
@@ -363,7 +363,7 @@ class Demo(QMainWindow):
                 chass.append(float(self.characteristic.lei2[i].text()))
             chass_list.append(chass)
             chass_list.append(int(self.board.edit_b2.text()))
-            chass_list.append(int(self.board.edit_b3.text()))
+            chass_list.append(float(self.board.edit_b3.text()))
             chass_list.append(self.characteristic.fbcca_index)
             print("列表：",chass_list)
 
