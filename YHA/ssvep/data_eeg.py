@@ -48,10 +48,11 @@ class MyThread(QThread):  # 线程类
         self.board.prepare_session()
         self.board.start_stream()
         time.sleep(3)
-        n = 1
+        n = 0
+        m = np.zeros(2)
         while self.is_on:
 
-            time.sleep(2)
+            time.sleep(1)
             data = self.board.get_current_board_data(self.board_set[3])
             data = data[1:9]
             mean_data = np.tile(data.mean(axis=1).reshape(8, 1), (1, self.board_set[3]))
@@ -75,16 +76,24 @@ class MyThread(QThread):  # 线程类
 
             r = feature_data[result]
 
-
+            # 更改部分（将程序中2s读取一次改为1s读取一次，每次512采样点改为256采样点）
             if result == 5 :
                 r = r + 0.1
             elif result == 6:
                 r = r + 0.05
 
-            if r > 0.4 :
-                print("分类结果：", result + 1)
-                b = str(result + 1)
-                self.command_signal.emit(b)
+            if r > 0.5 :
+                n = n+1
+                p = result + 1
+                print("分类结果：", p," n = ",n)
+                m = np.append(m,p)
+                m = m[1:]
+                if m[0] == m[1]:
+                    m[1] = 0
+                else:
+                    b = str(p)
+                    self.command_signal.emit(b)
+                    print("发送指令：",p)
 
 
 

@@ -6,7 +6,15 @@ import cv2
 
 NUM_OF_THREAD = 9
 b = threading.Barrier(NUM_OF_THREAD)
-# cap = cv2.VideoCapture("http://192.168.4.3:81/stream")
+# cap = cv2.VideoCapture("http://192.168.4.3:81/stream").isOpened() ? cv2.VideoCapture("http://192.168.4.3:81/stream"):cv2.VideoCapture("http://192.168.4.2:81/stream")
+
+# try:
+#     cap = cv2.VideoCapture("http://192.168.4.3:81/stream")
+# except  Exception as e:
+#     print(e)
+#     cap = cv2.VideoCapture("http://192.168.4.2:81/stream")
+
+    
 cap = cv2.VideoCapture(0)
 t1 = time.time()
 
@@ -53,21 +61,21 @@ def video():
     while True:
         CLOCK.tick(FrameRate)
         COUNT = COUNT + 1
-        if COUNT % 4.5 == 0 and cap.isOpened():
-            ret, frame = cap.read()
-            try:
-                frame = rot90(frame, k=-1)
-            except:
-                continue
-            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            frame = pygame.surfarray.make_surface(frame)
-            frame = pygame.transform.scale(frame, (400, 200))
-            frame = pygame.transform.flip(frame, False, True)
-            picture = win.blit(frame, (800, 400))
-            pygame.display.update(picture)
-            if COUNT == FrameRate:
-                COUNT = 0
-            print(CLOCK.get_time())
+        ret, frame = cap.read()
+        try:
+            frame = rot90(frame, k=-1)
+        except:
+            continue
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        frame = pygame.surfarray.make_surface(frame)
+        frame = pygame.transform.scale(frame, (600, 400))
+        frame = pygame.transform.flip(frame, False, True)
+        picture = win.blit(frame, (660, 340))
+        pygame.display.update(picture)
+        if COUNT == FrameRate:
+            COUNT = 0
+        print(CLOCK.get_time())
+            
 
 
 
